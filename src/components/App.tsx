@@ -1,27 +1,47 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import Home from '../pages/home';
-import Category from '../pages/category';
-
+import routes, { NavbarRoute } from '../routing/routes';
+import { RootState } from '../redux/store';
+import Page from './Page';
 import Navbar from './Navbar';
-import Logo from './Logo';
+import Container from './Container';
 
-function App() {
+const App: React.FC = () => {
+  const { authenticated } = useSelector(
+    (state: RootState) => state.authentication
+  );
+  // Used to trigger first transition upon loading the application for the first time
+  useEffect(() => {
+    const PageElement = document.getElementById('Page');
+
+    if (PageElement) {
+      PageElement.classList.add('Page-enter-done');
+    }
+  }, []);
+
   return (
     <div className='App'>
       <BrowserRouter>
         <Navbar />
 
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/category' exact component={Category} />
-        </Switch>
+        <Container>
+          {routes.map((route) => {
+            const { path, component, requiresAuthentication } = route;
 
-        <Logo />
+            return (
+              <Route key={path} exact path={path}>
+                {({ match }) => {
+                  return <Page match={match}>{component}</Page>;
+                }}
+              </Route>
+            );
+          })}
+        </Container>
       </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
