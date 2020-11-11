@@ -1,17 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import userInterfaceReducer from './slices/userInterface';
 import authenticationReducer from './slices/authentication';
 import shopReducer from './slices/shop';
 
-const store = configureStore({
+const rootStore = configureStore({
   reducer: {
-    userInterface: userInterfaceReducer,
     authentication: authenticationReducer,
     shop: shopReducer,
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootStore.getState>;
 
-export default store;
+export default rootStore;

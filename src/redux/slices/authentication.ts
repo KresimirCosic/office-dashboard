@@ -1,52 +1,36 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface UserData {
-  id: string;
-  displayName: string;
-}
-
 export interface AuthenticationData {
   authenticated: boolean;
-  user: UserData;
+  username: string;
 }
 
 const initialState: AuthenticationData = {
   authenticated: false,
-  user: {
-    id: '',
-    displayName: '',
-  },
+  username: '',
 };
 
 const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    setAuthenticationData(state, action: PayloadAction<UserData>) {
+    login(state, action: PayloadAction<string>) {
       state = {
+        ...state,
         authenticated: true,
-        user: { ...action.payload },
+        username: action.payload,
       };
     },
-    updateUserData(state, action: PayloadAction<Partial<UserData>>) {
-      state.user = { ...state.user, ...action.payload };
-    },
-    removeAuthenticationData(state) {
+    logout(state) {
       state = {
+        ...state,
         authenticated: false,
-        user: {
-          id: '',
-          displayName: '',
-        },
+        username: '',
       };
     },
   },
 });
 
-export const {
-  setAuthenticationData,
-  updateUserData,
-  removeAuthenticationData,
-} = authenticationSlice.actions;
+export const { login, logout } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

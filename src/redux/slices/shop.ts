@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { stat } from 'fs';
-import { createTracing } from 'trace_events';
 
 export interface StoreDetails {
   name: string;
