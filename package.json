@@ -1,21 +1,22 @@
 {
-  "name": "cra-ts-redux-template",
+  "name": "euris-office-dashboard",
   "author": {
     "name": "Kresimir Cosic",
     "email": "kresimir.cosic.business@gmail.com"
   },
-  "description": "Template deriving from a standard create-react-app using TypeScript and Redux as a baselines entry point for most applications.",
+  "description": "Dashboard app designed to handle store products by employees.",
   "keywords": [
     "javascript",
     "typescript",
     "react",
     "reactjs",
     "create-react-app",
-    "redux"
+    "redux",
+    "SASS"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KresimirCosic/cra-ts-redux-template"
+    "url": "https://github.com/KresimirCosic/euris-project"
   },
   "version": "1.0.0",
   "private": true,
@@ -23,6 +24,8 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@reduxjs/toolkit": "^1.4.0",
+    "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
     "normalize.css": "^8.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -60,6 +63,8 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
+    "@types/axios": "^0.14.0",
+    "@types/chart.js": "^2.9.27",
     "@types/jest": "^26.0.15",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
