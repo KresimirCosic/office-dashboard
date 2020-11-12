@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from '../redux/store';
 import NavbarLink from './NavbarLink';
-import routes, { NavbarRoute } from '../routing/routes';
+import routes, { PageRoute } from '../routing/routes';
 
 const Navbar: React.FC = () => {
   const { authenticated } = useSelector(
     (state: RootState) => state.authentication
   );
 
-  const determineNavbarLinkRender = (route: NavbarRoute) => {
+  const determineNavbarLinkRender = (route: PageRoute) => {
     // Returns a boolean depending on the state of the Redux store and the type of Route itself
     return (
-      route.basicRoute &&
-      ((route.requiresAuthentication && authenticated) ||
-        (!route.requiresAuthentication && !authenticated))
+      route.displayInNavbar &&
+      ((route.privateRoute && authenticated) ||
+        (!route.privateRoute && !authenticated))
     );
   };
 

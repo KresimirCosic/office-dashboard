@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import routes, { NavbarRoute } from '../routing/routes';
+import routes from '../routing/routes';
 import { RootState } from '../redux/store';
 import Page from './Page';
 import Navbar from './Navbar';
@@ -28,12 +28,16 @@ const App: React.FC = () => {
 
         <Container>
           {routes.map((route) => {
-            const { path, component, requiresAuthentication } = route;
+            const { path, page, privateRoute } = route;
 
             return (
               <Route key={path} exact path={path}>
                 {({ match }) => {
-                  return <Page match={match}>{component}</Page>;
+                  return (
+                    <Page privateRoute={privateRoute} match={match}>
+                      {page}
+                    </Page>
+                  );
                 }}
               </Route>
             );

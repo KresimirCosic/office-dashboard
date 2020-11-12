@@ -4,35 +4,35 @@ import Home from '../pages/home';
 import Category from '../pages/category';
 import Login from '../pages/login';
 
-export interface NavbarRoute {
+export interface PageRoute {
   name: string;
   path: string;
-  basicRoute: boolean;
-  requiresAuthentication: boolean;
-  component: React.ReactNode;
+  displayInNavbar: boolean;
+  privateRoute: boolean;
+  page: React.ReactNode;
 }
 
-const routes: NavbarRoute[] = [
+const routes: PageRoute[] = [
   {
     path: '/',
     name: 'Home',
-    basicRoute: true,
-    requiresAuthentication: true,
-    component: <Home />,
+    displayInNavbar: true,
+    privateRoute: true,
+    page: <Home />,
   },
   {
     path: '/login',
     name: 'Login',
-    basicRoute: true,
-    requiresAuthentication: false,
-    component: <Login />,
+    displayInNavbar: true,
+    privateRoute: false,
+    page: <Login />,
   },
   {
     path: '/category/:id',
     name: 'Category',
-    basicRoute: false,
-    requiresAuthentication: true,
-    component: <Category />,
+    displayInNavbar: false,
+    privateRoute: true,
+    page: <Category />,
   },
 ];
 
