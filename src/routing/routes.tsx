@@ -2,14 +2,12 @@ import React from 'react';
 
 import Home from '../pages/home';
 import Category from '../pages/category';
-import Login from '../pages/login';
 
 export interface PageRoute {
   name: string;
   path: string;
   displayInNavbar: boolean;
-  privateRoute: boolean;
-  page: React.ReactNode;
+  pageComponent: React.ReactNode;
 }
 
 const routes: PageRoute[] = [
@@ -17,22 +15,13 @@ const routes: PageRoute[] = [
     path: '/',
     name: 'Home',
     displayInNavbar: true,
-    privateRoute: true,
-    page: <Home />,
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    displayInNavbar: true,
-    privateRoute: false,
-    page: <Login />,
+    pageComponent: <Home />,
   },
   {
     path: '/category/:id',
     name: 'Category',
     displayInNavbar: false,
-    privateRoute: true,
-    page: <Category />,
+    pageComponent: <Category />,
   },
 ];
 

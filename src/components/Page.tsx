@@ -1,23 +1,12 @@
 import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { RootState } from '../redux/store';
-import { useSelector } from 'react-redux';
-
 interface PageProps {
   match: any | null;
-  privateRoute: boolean;
 }
 
-const Page: React.FC<PageProps> = ({
-  children,
-  match,
-  privateRoute: privatePage,
-}) => {
+const Page: React.FC<PageProps> = ({ children, match }) => {
   const nodeRef = useRef(null);
-  const { authenticated } = useSelector(
-    (state: RootState) => state.authentication
-  );
 
   return (
     <CSSTransition

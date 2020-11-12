@@ -1,17 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import routes from '../routing/routes';
-import { RootState } from '../redux/store';
 import Page from './Page';
 import Navbar from './Navbar';
 import Container from './Container';
 
 const App: React.FC = () => {
-  const { authenticated } = useSelector(
-    (state: RootState) => state.authentication
-  );
   // Used to trigger first transition upon loading the application for the first time
   useEffect(() => {
     const PageElement = document.getElementById('Page');
@@ -28,16 +23,12 @@ const App: React.FC = () => {
 
         <Container>
           {routes.map((route) => {
-            const { path, page, privateRoute } = route;
+            const { path, pageComponent } = route;
 
             return (
               <Route key={path} exact path={path}>
                 {({ match }) => {
-                  return (
-                    <Page privateRoute={privateRoute} match={match}>
-                      {page}
-                    </Page>
-                  );
+                  return <Page match={match}>{pageComponent}</Page>;
                 }}
               </Route>
             );
