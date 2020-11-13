@@ -20,7 +20,7 @@ const routes: PageRoute[] = [
   {
     path: '/category/:id',
     name: 'Category',
-    displayInNavbar: false,
+    displayInNavbar: true,
     pageComponent: <Category />,
   },
 ];

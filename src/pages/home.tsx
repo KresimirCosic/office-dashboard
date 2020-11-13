@@ -1,9 +1,11 @@
 import React from 'react';
 
+import ProductsList from '../components/ProductsList';
+
 const Home: React.FC = () => {
   return (
     <div className='Home'>
-      <h1>Home</h1>
+      <ProductsList />
     </div>
   );
 };

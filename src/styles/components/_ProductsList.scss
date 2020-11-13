@@ -1,0 +1,12 @@
+.ProductsList {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  &.flex-layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
