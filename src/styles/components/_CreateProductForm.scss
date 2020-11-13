@@ -1,0 +1,28 @@
+.CreateProductForm {
+  transition: all 200ms ease-out;
+  opacity: 0;
+  transform: translateY(-20%);
+  padding: 2rem 4rem;
+  &-enter {
+    &-active {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    &-done {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+    &-active {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
+    &-done {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
+  }
+}

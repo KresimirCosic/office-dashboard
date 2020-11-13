@@ -23,7 +23,6 @@ class ProductsService
   };
 
   public createProduct = (product: ProductDetails) => {
-    console.log(`${this.storeURL}/${this.resourceURL}`);
     return axios.post<string>(`${this.storeURL}/${this.resourceURL}`, product);
   };
 

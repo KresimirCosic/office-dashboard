@@ -28,7 +28,9 @@ const Product: React.FC<ProductData & { index: number }> = ({
         </h3>
         <p className='Product-description'>{data.description}</p>
         <h5 className='Product-price'>{data.price}</h5>
-        <Button className='Product-category'>{data.category}</Button>
+        <Button variant='outlined' className='Product-category'>
+          {data.category}
+        </Button>
       </li>
     </CSSTransition>
   );

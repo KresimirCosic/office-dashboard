@@ -30,3 +30,19 @@ html {
 .absolute {
   position: absolute;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  max-width: 25rem;
+  margin: 0% auto;
+  > * {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+  @media screen and (min-width: $breakpoint-md) {
+    padding: 2rem 4rem;
+  }
+}
