@@ -5,12 +5,25 @@ import { RootState } from '../redux/store';
 import Product from './Product';
 
 const ProductsList: React.FC = () => {
-  const { authentication, shop } = useSelector((state: RootState) => state);
+  const { authentication, shop, userInterface } = useSelector(
+    (state: RootState) => state
+  );
+
+  const { currentPage, productsPerPage } = userInterface;
+
+  const handleFilteringProductsByUser = () => {
+    return shop.products.filter(
+      (product) => product.data.employee === authentication.username
+    );
+  };
 
   return (
     <ul className='ProductsList'>
-      {shop.products
-        .filter((product) => product.data.employee === authentication.username)
+      {handleFilteringProductsByUser()
+        .slice(
+          (currentPage - 1) * productsPerPage,
+          currentPage * productsPerPage
+        )
         .map((product, index) => (
           <Product key={product.id} index={index} {...product} />
         ))}
