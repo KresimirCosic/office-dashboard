@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import NavbarLink from './NavbarLink';
 import routes from '../routing/routes';
-import { login, logout } from '../redux/slices/authentication';
+import { logout } from '../redux/slices/authentication';
 import { RootState } from '../redux/store';
 
 const Navbar: React.FC = () => {
@@ -12,10 +12,6 @@ const Navbar: React.FC = () => {
   const { authenticated, username } = useSelector(
     (state: RootState) => state.authentication
   );
-
-  const handleLogin = () => {
-    dispatch(login('Aldo'));
-  };
 
   const handleLogout = () => {
     dispatch(logout());

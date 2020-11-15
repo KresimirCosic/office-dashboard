@@ -1,15 +1,19 @@
 import React, { FormEvent, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import { RootState } from '../redux/store';
 import { productsService } from '../services/ProductsService';
+import { createProduct } from '../redux/slices/shop';
 
 const CreateProductForm: React.FC = () => {
   const nodeRef = useRef(null);
-  const { authentication, shop } = useSelector((state: RootState) => state);
+  const { authenticated, username } = useSelector(
+    (state: RootState) => state.authentication
+  );
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -20,18 +24,40 @@ const CreateProductForm: React.FC = () => {
 
     productsService
       .createProduct({
-        employee: authentication.username,
+        employee: username,
         title,
         description,
         price,
         category,
       })
-      .then((res) => console.log(res));
+      .then((response) => {
+        dispatch(
+          createProduct({
+            id: response.data,
+            data: {
+              employee: username,
+              title,
+              description,
+              price,
+              category,
+            },
+          })
+        );
+
+        resetForm();
+      });
+  };
+
+  const resetForm = () => {
+    setTitle('');
+    setDescription('');
+    setCategory('');
+    setPrice(0);
   };
 
   return (
     <CSSTransition
-      in={authentication.authenticated}
+      in={authenticated}
       timeout={350}
       classNames='CreateProductForm'
       unmountOnExit

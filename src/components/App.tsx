@@ -39,7 +39,7 @@ const App: React.FC = () => {
     categoriesService.getData().then(({ data }) => {
       dispatch(setCategoriesData([...data]));
     });
-  }, []);
+  });
 
   return (
     <div className='App'>

@@ -55,31 +55,43 @@ const shopSlice = createSlice({
     setStoreData(state, action: PayloadAction<StoreData>) {
       state.store = { ...state.store, ...action.payload };
     },
-    removeStoreData(state) {
+    deleteStoreData(state) {
       state.store = { ...initialState.store };
     },
     setCategoriesData(state, action: PayloadAction<CategoryData[]>) {
       state.categories = [...action.payload];
     },
-    removeCategoriesData(state) {
+    deleteCategoriesData(state) {
       state.categories = [...initialState.categories];
     },
     setProductsData(state, action: PayloadAction<ProductData[]>) {
       state.products = [...action.payload];
     },
-    removeProductsData(state) {
+    deleteProductsData(state) {
       state.products = [...initialState.products];
+    },
+    createProduct(state, action: PayloadAction<ProductData>) {
+      state.products.push(action.payload);
+    },
+    deleteProduct(state, action: PayloadAction<string>) {
+      const index = state.products.findIndex(
+        (product) => product.id === action.payload
+      );
+
+      state.products.splice(index, 1);
     },
   },
 });
 
 export const {
   setStoreData,
-  removeStoreData,
+  deleteStoreData,
   setCategoriesData,
-  removeCategoriesData,
+  deleteCategoriesData,
   setProductsData,
-  removeProductsData,
+  deleteProductsData,
+  createProduct,
+  deleteProduct,
 } = shopSlice.actions;
 
 export default shopSlice.reducer;
