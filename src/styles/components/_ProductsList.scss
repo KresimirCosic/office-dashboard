@@ -3,13 +3,13 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  &-controls {
-    margin-bottom: 2rem;
-  }
   &.flex-layout {
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+  }
+  &Controls {
+    margin-bottom: 2rem;
   }
 }

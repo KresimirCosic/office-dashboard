@@ -6,13 +6,15 @@ import Button from '@material-ui/core/Button';
 
 import { RootState } from '../redux/store';
 import { productsService } from '../services/ProductsService';
-import { createProduct } from '../redux/slices/shop';
+import {
+  createProduct,
+  createCategoryData,
+  incrementCategoryProductsData,
+} from '../redux/slices/shop';
 
 const CreateProductForm: React.FC = () => {
   const nodeRef = useRef(null);
-  const { authenticated, username } = useSelector(
-    (state: RootState) => state.authentication
-  );
+  const { authentication, shop } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -24,7 +26,7 @@ const CreateProductForm: React.FC = () => {
 
     productsService
       .createProduct({
-        employee: username,
+        employee: authentication.username,
         title,
         description,
         price,
@@ -35,7 +37,7 @@ const CreateProductForm: React.FC = () => {
           createProduct({
             id: response.data,
             data: {
-              employee: username,
+              employee: authentication.username,
               title,
               description,
               price,
@@ -44,8 +46,25 @@ const CreateProductForm: React.FC = () => {
           })
         );
 
+        checkCategoryStatus(category);
+
         resetForm();
       });
+  };
+
+  const checkCategoryStatus = (categoryName: string) => {
+    const index = shop.categories.findIndex(
+      (categoryData) => categoryData.category === categoryName
+    );
+
+    dispatch(
+      index > -1
+        ? incrementCategoryProductsData(categoryName)
+        : createCategoryData({
+            category,
+            numberOfProducts: 1,
+          })
+    );
   };
 
   const resetForm = () => {
@@ -57,7 +76,7 @@ const CreateProductForm: React.FC = () => {
 
   return (
     <CSSTransition
-      in={authenticated}
+      in={authentication.authenticated}
       timeout={350}
       classNames='CreateProductForm'
       unmountOnExit

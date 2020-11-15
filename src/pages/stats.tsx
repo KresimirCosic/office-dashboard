@@ -18,17 +18,21 @@ const Stats: React.FC = () => {
     };
 
     if (ctx) {
-      const categoriesChart = new Chart(ctx, {
+      new Chart(ctx, {
         data: {
           labels: categories.map((category) => category.category),
           datasets: [
             {
               label: '# of products',
-              data: categories.map((category) => category.numberOfProducts),
+              data: categories.map(
+                (categoryData) => categoryData.numberOfProducts
+              ),
               backgroundColor: categories.map((category) =>
                 createRandomColor()
               ),
-              borderColor: categories.map((category) => createRandomColor()),
+              borderColor: categories.map((categoryData) =>
+                createRandomColor()
+              ),
               borderWidth: 1,
             },
           ],

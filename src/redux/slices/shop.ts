@@ -64,6 +64,16 @@ const shopSlice = createSlice({
     deleteCategoriesData(state) {
       state.categories = [...initialState.categories];
     },
+    createCategoryData(state, action: PayloadAction<CategoryData>) {
+      state.categories.push(action.payload);
+    },
+    incrementCategoryProductsData(state, action: PayloadAction<string>) {
+      const index = state.categories.findIndex(
+        (categoryData) => categoryData.category === action.payload
+      );
+
+      state.categories[index].numberOfProducts++;
+    },
     setProductsData(state, action: PayloadAction<ProductData[]>) {
       state.products = [...action.payload];
     },
@@ -88,6 +98,8 @@ export const {
   deleteStoreData,
   setCategoriesData,
   deleteCategoriesData,
+  createCategoryData,
+  incrementCategoryProductsData,
   setProductsData,
   deleteProductsData,
   createProduct,
