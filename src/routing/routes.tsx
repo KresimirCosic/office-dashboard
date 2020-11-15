@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Home from '../pages/home';
-import Category from '../pages/category';
+import Stats from '../pages/stats';
 
 export interface PageRoute {
   name: string;
@@ -18,10 +18,10 @@ const routes: PageRoute[] = [
     pageComponent: <Home />,
   },
   {
-    path: '/category/:id',
-    name: 'Category',
-    displayInNavbar: false,
-    pageComponent: <Category />,
+    path: '/stats',
+    name: 'Stats',
+    displayInNavbar: true,
+    pageComponent: <Stats />,
   },
 ];
 
