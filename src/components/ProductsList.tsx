@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../redux/store';
@@ -17,16 +17,39 @@ const ProductsList: React.FC = () => {
     );
   };
 
+  const handlePagination = () => {
+    return handleFilteringProductsByUser().slice(
+      (currentPage - 1) * productsPerPage,
+      currentPage * productsPerPage
+    );
+  };
+
+  useEffect(() => {
+    const productsList = document.querySelectorAll('.ProductsList')[0];
+    const products = document.querySelectorAll('.Product');
+
+    if (userInterface.gridView) {
+      if (productsList.className.indexOf('flex-layout') < 0)
+        productsList.classList.add('flex-layout');
+      products.forEach((product) => {
+        if (product.className.indexOf('flex-item') < 0)
+          product.classList.add('flex-item');
+      });
+    } else {
+      if (productsList.className.indexOf('flex-layout') > -1)
+        productsList.classList.remove('flex-layout');
+      products.forEach((product) => {
+        if (product.className.indexOf('flex-item') > -1)
+          product.classList.remove('flex-item');
+      });
+    }
+  });
+
   return (
     <ul className='ProductsList'>
-      {handleFilteringProductsByUser()
-        .slice(
-          (currentPage - 1) * productsPerPage,
-          currentPage * productsPerPage
-        )
-        .map((product, index) => (
-          <Product key={product.id} index={index} {...product} />
-        ))}
+      {handlePagination().map((product, index) => (
+        <Product key={product.id} index={index} {...product} />
+      ))}
     </ul>
   );
 };
