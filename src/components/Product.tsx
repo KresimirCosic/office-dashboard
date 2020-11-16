@@ -80,10 +80,8 @@ const Product: React.FC<ProductData & { index: number }> = ({
           >
             DELETE
           </Button>
-          <Link to={`/product/${id}`}>
-            <Button variant='outlined' className='Product-overview'>
-              OVERVIEW
-            </Button>
+          <Link to={`/product/${id}`} className='Product-overview'>
+            <Button variant='outlined'>OVERVIEW</Button>
           </Link>
         </div>
       </li>

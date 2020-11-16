@@ -70,16 +70,24 @@ const Overview: React.FC = () => {
       ? filteredArray.reduce((previous, current) => {
           return previous + current.score;
         }, 0) / filteredArray.length
-      : 0;
+      : 'No reviews yet';
   };
 
   return (
     <div className='Overview'>
-      <h1>{calculateAverageScore()}</h1>
-      <h3 className='Overview-title'>{overviewingProduct.title}</h3>
-      <p className='Overview-description'>{overviewingProduct.description}</p>
-      <h5 className='Overview-price'>{overviewingProduct.price}</h5>
-      <h3 className='Overview-category'>{overviewingProduct.category}</h3>
+      {overviewingProduct.title && (
+        <>
+          <h1 className='Overview-title'>
+            Review of: {overviewingProduct.title} ({overviewingProduct.category}
+            )
+          </h1>
+          <h2>Average: {calculateAverageScore()}</h2>
+          <p className='Overview-description'>
+            {overviewingProduct.description}
+          </p>
+          <h5 className='Overview-price'>Price: ${overviewingProduct.price}</h5>
+        </>
+      )}
       <Reviews id={id} />
       <CreateReviewForm />
     </div>

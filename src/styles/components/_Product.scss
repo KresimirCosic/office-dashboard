@@ -36,6 +36,9 @@
     display: flex;
     justify-content: space-evenly;
   }
+  &-overview {
+    text-decoration: none;
+  }
   &.flex-item {
     width: 400px;
     align-self: stretch;
