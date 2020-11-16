@@ -29,7 +29,7 @@ export interface ProductData {
   data: ProductDetails;
 }
 
-export interface Review {
+export interface ReviewData {
   productID: string;
   title: string;
   description: string;
@@ -40,7 +40,7 @@ export interface ShopData {
   store: StoreData;
   categories: CategoryData[];
   products: ProductData[];
-  reviews: Review[];
+  reviews: ReviewData[];
   reviewingProduct: ProductDetails;
 }
 
@@ -111,7 +111,7 @@ const shopSlice = createSlice({
     removeReviewingProduct(state) {
       state.reviewingProduct = { ...initialState.reviewingProduct };
     },
-    createReview(state, action: PayloadAction<Review>) {
+    createReview(state, action: PayloadAction<ReviewData>) {
       state.reviews.push(action.payload);
     },
   },

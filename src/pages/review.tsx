@@ -13,6 +13,8 @@ import {
   deleteNotification,
 } from '../redux/slices/userInterface';
 import { RootState } from '../redux/store';
+import Reviews from '../components/Reviews';
+import CreateReviewForm from '../components/CreateReviewForm';
 
 interface IReviewURLParameters {
   id: string;
@@ -65,6 +67,8 @@ const Review: React.FC = () => {
       <p className='Review-description'>{reviewingProduct.description}</p>
       <h5 className='Review-price'>{reviewingProduct.price}</h5>
       <h3 className='Review-category'>{reviewingProduct.category}</h3>
+      <Reviews id={id} />
+      <CreateReviewForm />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const CreateProductForm: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(1);
 
   const handleProductCreation = (e: FormEvent) => {
     e.preventDefault();
@@ -118,6 +118,7 @@ const CreateProductForm: React.FC = () => {
           label='Price'
           variant='outlined'
           type='number'
+          InputProps={{ inputProps: { min: 1 } }}
         />
         <Button
           variant='outlined'
