@@ -5,12 +5,12 @@
   padding: 2rem 4rem;
   &-enter {
     &-active {
-      opacity: 1;
-      transform: translateX(0px);
+      opacity: 0;
+      transform: translateY(-20%);
     }
     &-done {
       opacity: 1;
-      transform: translateX(0px);
+      transform: translateY(0px);
     }
   }
   &-exit {

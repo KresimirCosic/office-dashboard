@@ -1,4 +1,6 @@
 .Notification {
+  transition: all 350ms;
+  opacity: 0;
   background-color: $color-quinary;
   color: $color-white;
   max-width: 10rem;
@@ -8,5 +10,27 @@
   border-radius: 5px;
   &:not(:last-child) {
     margin-bottom: 1rem;
+  }
+  &-enter {
+    &-active {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
+    &-done {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  &-exit {
+    opacity: 1;
+    transform: scale(1);
+    &-active {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
+    &-done {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
   }
 }
