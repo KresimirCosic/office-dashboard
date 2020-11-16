@@ -28,7 +28,7 @@ abstract class ShopService<R extends ShopServiceRepsonse>
 
   public getData = () => {
     return this.resourceURL
-      ? axios.get<R>(`${this.storeURL}/${this.resourceURL}asdf`)
+      ? axios.get<R>(`${this.storeURL}/${this.resourceURL}`)
       : axios.get<R>(this.storeURL);
   };
 }
