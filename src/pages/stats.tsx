@@ -44,7 +44,6 @@ const Stats: React.FC = () => {
 
   return (
     <div className='Stats'>
-      <h1>Stats</h1>
       <canvas id='categories-stats'></canvas>
     </div>
   );

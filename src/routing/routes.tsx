@@ -2,6 +2,7 @@ import React from 'react';
 
 import Home from '../pages/home';
 import Stats from '../pages/stats';
+import Review from '../pages/review';
 
 export interface PageRoute {
   name: string;
@@ -22,6 +23,12 @@ const routes: PageRoute[] = [
     name: 'Stats',
     displayInNavbar: true,
     pageComponent: <Stats />,
+  },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    displayInNavbar: false,
+    pageComponent: <Review />,
   },
 ];
 

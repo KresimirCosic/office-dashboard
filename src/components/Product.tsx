@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { ProductData } from '../redux/slices/shop';
 import { productsService } from '../services/ProductsService';
@@ -46,6 +47,11 @@ const Product: React.FC<ProductData & { index: number }> = ({
         >
           DELETE
         </Button>
+        <Link to={`/product/${id}`}>
+          <Button variant='outlined' className='Product-review'>
+            REVIEW
+          </Button>
+        </Link>
       </li>
     </CSSTransition>
   );

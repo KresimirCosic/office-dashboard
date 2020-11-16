@@ -29,10 +29,19 @@ export interface ProductData {
   data: ProductDetails;
 }
 
+export interface Review {
+  productID: string;
+  title: string;
+  description: string;
+  score: number;
+}
+
 export interface ShopData {
   store: StoreData;
   categories: CategoryData[];
   products: ProductData[];
+  reviews: Review[];
+  reviewingProduct: ProductDetails;
 }
 
 const initialState: ShopData = {
@@ -46,6 +55,14 @@ const initialState: ShopData = {
   },
   categories: [],
   products: [],
+  reviewingProduct: {
+    title: '',
+    category: '',
+    price: 0,
+    employee: '',
+    description: '',
+  },
+  reviews: [],
 };
 
 const shopSlice = createSlice({
@@ -71,7 +88,6 @@ const shopSlice = createSlice({
       const index = state.categories.findIndex(
         (categoryData) => categoryData.category === action.payload
       );
-
       state.categories[index].numberOfProducts++;
     },
     setProductsData(state, action: PayloadAction<ProductData[]>) {
@@ -87,8 +103,16 @@ const shopSlice = createSlice({
       const index = state.products.findIndex(
         (product) => product.id === action.payload
       );
-
       state.products.splice(index, 1);
+    },
+    setReviewingProduct(state, action: PayloadAction<ProductDetails>) {
+      state.reviewingProduct = { ...action.payload };
+    },
+    removeReviewingProduct(state) {
+      state.reviewingProduct = { ...initialState.reviewingProduct };
+    },
+    createReview(state, action: PayloadAction<Review>) {
+      state.reviews.push(action.payload);
     },
   },
 });
@@ -104,6 +128,9 @@ export const {
   deleteProductsData,
   createProduct,
   deleteProduct,
+  setReviewingProduct,
+  removeReviewingProduct,
+  createReview,
 } = shopSlice.actions;
 
 export default shopSlice.reducer;
