@@ -2,7 +2,7 @@ import React from 'react';
 
 import Home from '../pages/home';
 import Stats from '../pages/stats';
-import Review from '../pages/review';
+import Overview from '../pages/overview';
 
 export interface PageRoute {
   name: string;
@@ -28,7 +28,7 @@ const routes: PageRoute[] = [
     path: '/product/:id',
     name: 'Product',
     displayInNavbar: false,
-    pageComponent: <Review />,
+    pageComponent: <Overview />,
   },
 ];
 

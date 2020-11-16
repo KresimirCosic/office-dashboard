@@ -8,9 +8,9 @@ import { IReviewsProps } from './Reviews';
 import { createReview } from '../redux/slices/shop';
 
 const CreateReviewForm: React.FC = () => {
-  const [reviewTitle, setReviewTitle] = useState('');
-  const [reviewDescription, setReviewDescription] = useState('');
-  const [reviewScore, setReviewScore] = useState(1);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [score, setScore] = useState(1);
   const { id } = useParams<IReviewsProps>();
   const dispatch = useDispatch();
 
@@ -20,9 +20,9 @@ const CreateReviewForm: React.FC = () => {
     dispatch(
       createReview({
         productID: id,
-        title: reviewTitle,
-        description: reviewDescription,
-        score: reviewScore,
+        title,
+        description,
+        score,
       })
     );
 
@@ -30,30 +30,30 @@ const CreateReviewForm: React.FC = () => {
   };
 
   const resetForm = () => {
-    setReviewTitle('');
-    setReviewDescription('');
-    setReviewScore(1);
+    setTitle('');
+    setDescription('');
+    setScore(1);
   };
 
   return (
     <form className='CreateReviewForm' onSubmit={handleReviewCreation}>
       <TextField
-        onChange={(e) => setReviewTitle(e.target.value)}
-        value={reviewTitle}
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
         id='review-title'
         label='Title'
         variant='outlined'
       />
       <TextField
-        onChange={(e) => setReviewDescription(e.target.value)}
-        value={reviewDescription}
+        onChange={(e) => setDescription(e.target.value)}
+        value={description}
         id='review-description'
         label='Description'
         variant='outlined'
       />
       <TextField
-        onChange={(e) => setReviewScore(parseInt(e.target.value))}
-        value={reviewScore}
+        onChange={(e) => setScore(parseInt(e.target.value))}
+        value={score}
         id='review-description'
         label='Score'
         variant='outlined'
@@ -61,7 +61,11 @@ const CreateReviewForm: React.FC = () => {
         InputProps={{ inputProps: { min: 1, max: 10 } }}
       />
 
-      <Button type='submit' variant='outlined'>
+      <Button
+        type='submit'
+        variant='outlined'
+        disabled={!title || !description || !score ? true : false}
+      >
         Submit Review
       </Button>
     </form>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 interface PageProps {
@@ -7,6 +7,11 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ children, match }) => {
   const nodeRef = useRef(null);
+
+  useEffect(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  });
 
   return (
     <CSSTransition

@@ -3,10 +3,15 @@ import { CSSTransition } from 'react-transition-group';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { v1 as uuid } from 'uuid';
 
 import { ProductData } from '../redux/slices/shop';
 import { productsService } from '../services/ProductsService';
 import { deleteProduct } from '../redux/slices/shop';
+import {
+  createNotification,
+  deleteNotification,
+} from '../redux/slices/userInterface';
 
 const Product: React.FC<ProductData & { index: number }> = ({
   index,
@@ -17,9 +22,25 @@ const Product: React.FC<ProductData & { index: number }> = ({
   const dispatch = useDispatch();
 
   const handleDeleteProduct = (id: string) => {
-    productsService.deleteProduct(id).then((response) => {
-      dispatch(deleteProduct(id));
-    });
+    productsService
+      .deleteProduct(id)
+      .then((response) => {
+        dispatch(deleteProduct(id));
+      })
+      .catch((error) => {
+        const notificationID = uuid();
+
+        dispatch(
+          createNotification({
+            id: notificationID,
+            message: 'Failed to delete product.',
+          })
+        );
+
+        setTimeout(() => {
+          dispatch(deleteNotification(notificationID));
+        }, 5000);
+      });
   };
 
   return (
@@ -48,8 +69,8 @@ const Product: React.FC<ProductData & { index: number }> = ({
           DELETE
         </Button>
         <Link to={`/product/${id}`}>
-          <Button variant='outlined' className='Product-review'>
-            REVIEW
+          <Button variant='outlined' className='Product-overview'>
+            OVERVIEW
           </Button>
         </Link>
       </li>

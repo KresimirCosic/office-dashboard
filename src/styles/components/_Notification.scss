@@ -6,7 +6,7 @@
   max-width: 10rem;
   width: 100%;
   padding: 1rem;
-  box-shadow: 3px 3px 5px 0px rgba(231, 111, 81, 0.9);
+  @include box-shadow($color-quinary, 0.9);
   border-radius: 5px;
   &:not(:last-child) {
     margin-bottom: 1rem;

@@ -105,10 +105,10 @@ const shopSlice = createSlice({
       );
       state.products.splice(index, 1);
     },
-    setReviewingProduct(state, action: PayloadAction<ProductDetails>) {
+    setOverviewingProduct(state, action: PayloadAction<ProductDetails>) {
       state.reviewingProduct = { ...action.payload };
     },
-    removeReviewingProduct(state) {
+    removeOverviewingProduct(state) {
       state.reviewingProduct = { ...initialState.reviewingProduct };
     },
     createReview(state, action: PayloadAction<ReviewData>) {
@@ -128,8 +128,8 @@ export const {
   deleteProductsData,
   createProduct,
   deleteProduct,
-  setReviewingProduct,
-  removeReviewingProduct,
+  setOverviewingProduct,
+  removeOverviewingProduct,
   createReview,
 } = shopSlice.actions;
 

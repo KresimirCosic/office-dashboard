@@ -5,8 +5,8 @@ import { v1 as uuid } from 'uuid';
 
 import { productsService } from '../services/ProductsService';
 import {
-  setReviewingProduct,
-  removeReviewingProduct,
+  setOverviewingProduct,
+  removeOverviewingProduct,
 } from '../redux/slices/shop';
 import {
   createNotification,
@@ -16,14 +16,16 @@ import { RootState } from '../redux/store';
 import Reviews from '../components/Reviews';
 import CreateReviewForm from '../components/CreateReviewForm';
 
-interface IReviewURLParameters {
+interface IOverviewURLParameters {
   id: string;
 }
 
-const Review: React.FC = () => {
-  const { id } = useParams<IReviewURLParameters>();
+const Overview: React.FC = () => {
+  const { id } = useParams<IOverviewURLParameters>();
   const dispatch = useDispatch();
-  const { reviewingProduct } = useSelector((state: RootState) => state.shop);
+  const { reviewingProduct: overviewingProduct } = useSelector(
+    (state: RootState) => state.shop
+  );
 
   useEffect(() => {
     productsService
@@ -32,7 +34,7 @@ const Review: React.FC = () => {
         const { title, category, price, employee, description } = response.data;
 
         dispatch(
-          setReviewingProduct({
+          setOverviewingProduct({
             title,
             category,
             price,
@@ -57,20 +59,20 @@ const Review: React.FC = () => {
       });
 
     return () => {
-      dispatch(removeReviewingProduct());
+      dispatch(removeOverviewingProduct());
     };
   }, []);
 
   return (
-    <div className='Review'>
-      <h3 className='Review-title'>{reviewingProduct.title}</h3>
-      <p className='Review-description'>{reviewingProduct.description}</p>
-      <h5 className='Review-price'>{reviewingProduct.price}</h5>
-      <h3 className='Review-category'>{reviewingProduct.category}</h3>
+    <div className='Overview'>
+      <h3 className='Overview-title'>{overviewingProduct.title}</h3>
+      <p className='Overview-description'>{overviewingProduct.description}</p>
+      <h5 className='Overview-price'>{overviewingProduct.price}</h5>
+      <h3 className='Overview-category'>{overviewingProduct.category}</h3>
       <Reviews id={id} />
       <CreateReviewForm />
     </div>
   );
 };
 
-export default Review;
+export default Overview;
