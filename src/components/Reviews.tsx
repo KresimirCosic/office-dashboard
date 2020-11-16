@@ -16,7 +16,7 @@ const Reviews: React.FC<IReviewsProps> = ({ id }) => {
       {reviews
         .filter((review) => review.productID === id)
         .map((review) => (
-          <Review key={`${review.productID}-${review.title}`} {...review} />
+          <Review key={review.reviewID} {...review} />
         ))}
     </div>
   );

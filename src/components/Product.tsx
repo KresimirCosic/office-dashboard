@@ -55,24 +55,37 @@ const Product: React.FC<ProductData & { index: number }> = ({
       nodeRef={nodeRef}
     >
       <li ref={nodeRef} className='Product'>
-        <h3 className='Product-title'>
-          {data.title} (<i className='Product-employee'>{data.employee}</i>)
-        </h3>
-        <p className='Product-description'>{data.description}</p>
-        <h5 className='Product-price'>{data.price}</h5>
-        <h3 className='Product-category'>{data.category}</h3>
-        <Button
-          onClick={() => handleDeleteProduct(id)}
-          variant='outlined'
-          className='Product-delete'
-        >
-          DELETE
-        </Button>
-        <Link to={`/product/${id}`}>
-          <Button variant='outlined' className='Product-overview'>
-            OVERVIEW
+        <h2 className='Product-title'>{data.title}</h2>
+        <div className='Product-details'>
+          <div className='Product-left'>
+            <p className='Product-description'>
+              {data.description.length > 50
+                ? `${data.description.substring(0, 50)}...`
+                : data.description}
+            </p>
+            <h5 className='Product-category'>
+              <i>{data.category}</i>
+            </h5>
+          </div>
+
+          <div className='Product-right'>
+            <h2 className='Product-price'>${data.price}</h2>
+          </div>
+        </div>
+        <div className='Product-controls'>
+          <Button
+            onClick={() => handleDeleteProduct(id)}
+            variant='outlined'
+            className='Product-delete'
+          >
+            DELETE
           </Button>
-        </Link>
+          <Link to={`/product/${id}`}>
+            <Button variant='outlined' className='Product-overview'>
+              OVERVIEW
+            </Button>
+          </Link>
+        </div>
       </li>
     </CSSTransition>
   );

@@ -30,6 +30,7 @@ export interface ProductData {
 }
 
 export interface ReviewData {
+  reviewID: string;
   productID: string;
   title: string;
   description: string;
@@ -41,7 +42,7 @@ export interface ShopData {
   categories: CategoryData[];
   products: ProductData[];
   reviews: ReviewData[];
-  reviewingProduct: ProductDetails;
+  overviewingProduct: ProductDetails;
 }
 
 const initialState: ShopData = {
@@ -55,7 +56,7 @@ const initialState: ShopData = {
   },
   categories: [],
   products: [],
-  reviewingProduct: {
+  overviewingProduct: {
     title: '',
     category: '',
     price: 0,
@@ -106,10 +107,10 @@ const shopSlice = createSlice({
       state.products.splice(index, 1);
     },
     setOverviewingProduct(state, action: PayloadAction<ProductDetails>) {
-      state.reviewingProduct = { ...action.payload };
+      state.overviewingProduct = { ...action.payload };
     },
     removeOverviewingProduct(state) {
-      state.reviewingProduct = { ...initialState.reviewingProduct };
+      state.overviewingProduct = { ...initialState.overviewingProduct };
     },
     createReview(state, action: PayloadAction<ReviewData>) {
       state.reviews.push(action.payload);

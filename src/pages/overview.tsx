@@ -23,7 +23,7 @@ interface IOverviewURLParameters {
 const Overview: React.FC = () => {
   const { id } = useParams<IOverviewURLParameters>();
   const dispatch = useDispatch();
-  const { reviewingProduct: overviewingProduct } = useSelector(
+  const { overviewingProduct, reviews } = useSelector(
     (state: RootState) => state.shop
   );
 
@@ -63,8 +63,21 @@ const Overview: React.FC = () => {
     };
   }, []);
 
+  const calculateAverageScore = () => {
+    const filteredArray = reviews.filter((review) => review.productID === id);
+
+    return (
+      reviews
+        .filter((review) => review.productID === id)
+        .reduce((previous, current) => {
+          return previous + current.score;
+        }, 0) / filteredArray.length
+    );
+  };
+
   return (
     <div className='Overview'>
+      <h1>{calculateAverageScore()}</h1>
       <h3 className='Overview-title'>{overviewingProduct.title}</h3>
       <p className='Overview-description'>{overviewingProduct.description}</p>
       <h5 className='Overview-price'>{overviewingProduct.price}</h5>

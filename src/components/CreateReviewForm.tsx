@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { v1 as uuid } from 'uuid';
 
 import { IReviewsProps } from './Reviews';
 import { createReview } from '../redux/slices/shop';
@@ -17,8 +18,11 @@ const CreateReviewForm: React.FC = () => {
   const handleReviewCreation = (e: FormEvent) => {
     e.preventDefault();
 
+    const reviewID = uuid();
+
     dispatch(
       createReview({
+        reviewID,
         productID: id,
         title,
         description,

@@ -3,9 +3,39 @@
   opacity: 0;
   display: block;
   padding: 2rem 4rem;
-  border: 1px dashed #000;
+  @include box-shadow($color-black, 0.1);
+  border-radius: 5px;
   transform: translateX(-5%);
   margin-bottom: 2rem;
+  &-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  &-left {
+    max-width: 50%;
+    width: 100%;
+    align-self: stretch;
+  }
+  &-right {
+    max-width: 50%;
+    width: 100%;
+    align-self: stretch;
+  }
+  &-price {
+    text-align: right;
+  }
+  &-description,
+  &-category {
+    text-align: left;
+  }
+  &-controls {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
   &.flex-item {
     width: 400px;
     align-self: stretch;
