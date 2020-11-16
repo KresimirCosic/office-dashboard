@@ -66,13 +66,11 @@ const Overview: React.FC = () => {
   const calculateAverageScore = () => {
     const filteredArray = reviews.filter((review) => review.productID === id);
 
-    return (
-      reviews
-        .filter((review) => review.productID === id)
-        .reduce((previous, current) => {
+    return filteredArray.length
+      ? filteredArray.reduce((previous, current) => {
           return previous + current.score;
         }, 0) / filteredArray.length
-    );
+      : 0;
   };
 
   return (

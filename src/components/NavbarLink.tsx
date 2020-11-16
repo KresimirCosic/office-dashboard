@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 export interface NavbarLinkProps {
   path: string;
@@ -8,11 +9,9 @@ export interface NavbarLinkProps {
 
 const NavbarLink: React.FC<NavbarLinkProps> = ({ path, name }) => {
   return (
-    <li className='NavbarLink'>
-      <NavLink to={path} exact activeClassName='active'>
-        {name}
-      </NavLink>
-    </li>
+    <NavLink to={path} exact activeClassName='active' className='NavbarLink'>
+      <Button variant='outlined'>{name}</Button>
+    </NavLink>
   );
 };
 

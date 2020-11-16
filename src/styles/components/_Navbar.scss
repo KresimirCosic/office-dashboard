@@ -1,7 +1,18 @@
 .Navbar {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
   margin: 0 auto;
-  list-style-type: none;
-  padding: 0;
+  &List {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    padding: 0;
+  }
+  &Item {
+    &:not(:last-child) {
+      margin-right: 0.2rem;
+    }
+  }
 }

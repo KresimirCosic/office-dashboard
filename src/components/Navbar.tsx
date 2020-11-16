@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Button from '@material-ui/core/Button';
 
 import NavbarLink from './NavbarLink';
 import routes from '../routing/routes';
@@ -9,28 +10,38 @@ import { RootState } from '../redux/store';
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();
-  const { authenticated, username } = useSelector(
-    (state: RootState) => state.authentication
-  );
+  const { authentication, shop } = useSelector((state: RootState) => state);
+  const { name } = shop.store.data;
 
   const handleLogout = () => {
     dispatch(logout());
   };
 
   return (
-    <ul className='Navbar'>
-      {authenticated && (
-        <Button variant='outlined' onClick={handleLogout}>
-          Logout <small>({username})</small>
-        </Button>
-      )}
-      {routes.map(
-        (route) =>
-          route.displayInNavbar && (
-            <NavbarLink key={route.name} path={route.path} name={route.name} />
-          )
-      )}
-    </ul>
+    <nav className='Navbar'>
+      <h1>{name ? name : 'Home'}</h1>
+      <ul className='NavbarList'>
+        {routes.map(
+          (route) =>
+            route.displayInNavbar && (
+              <li className='NavbarItem'>
+                <NavbarLink
+                  key={route.name}
+                  path={route.path}
+                  name={route.name}
+                />
+              </li>
+            )
+        )}
+        {authentication.authenticated ? (
+          <li className='NavbarItem'>
+            <Button variant='outlined' onClick={handleLogout}>
+              Logout ({authentication.username})
+            </Button>
+          </li>
+        ) : null}
+      </ul>
+    </nav>
   );
 };
 

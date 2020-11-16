@@ -1,7 +1,12 @@
 .NavbarLink {
   text-decoration: none;
-  .active {
+  display: block;
+  border-radius: 4px;
+  &.active {
     font-weight: 700;
-    text-decoration: underline;
+    background-color: $color-quinary;
+    button {
+      color: $color-white;
+    }
   }
 }
